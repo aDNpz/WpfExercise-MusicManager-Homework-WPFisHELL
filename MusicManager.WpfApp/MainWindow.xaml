@@ -1,0 +1,79 @@
+﻿<Window x:Class="MusicManager.WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicManager.WpfApp"
+        xmlns:vm="clr-namespace:MusicManager.WpfApp.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <vm:MainViewModel x:Name="ViewModel"></vm:MainViewModel>
+    </Window.DataContext>
+    <Grid Margin="5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <Label Width="70" HorizontalAlignment="Left">Search</Label>
+            <TextBox Width="300" Margin="2" Text="{Binding Path=SearchAlbum, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Width="100" Margin="2" Command="{Binding Path=DeleteAlbumCommand}">Delete Album</Button>
+            <Button Width="100" Margin="2" Command="{Binding Path=AddAlbumCommand}">Add Album</Button>
+            <Button Width="100" Margin="2" Command="{Binding Path=EditAlbumCommand}">Edit Album</Button>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Albums}" AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding Path=SelectedAlbum}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Album" Binding="{Binding Path=Title}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Interpret" Binding="{Binding Path=Interpreter}">
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+            <Label Width="70" HorizontalAlignment="Left">Search</Label>
+            <TextBox Width="300" Margin="2"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Width="100" Margin="2" Command="{Binding Path=DeleteTrackCommand}">Delete Track</Button>
+            <Button Width="100" Margin="2" Command="{Binding Path=AddTrackCommand}">Add Track</Button>
+            <Button Width="100" Margin="2" Command="{Binding Path=EditTrackCommand}">Edit Track</Button>
+        </StackPanel>
+
+        <DataGrid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Tracks}" AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding Path=SelectedTrack}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Title}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Composer" Binding="{Binding Path=Interpreter}">
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
